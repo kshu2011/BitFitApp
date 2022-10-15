@@ -1,5 +1,6 @@
 package com.example.bitfit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -22,15 +23,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.addButton).setOnClickListener{
-            val exerciseName = findViewById<EditText>(R.id.exerciseNameEdit).text.toString()
-            val exerciseInfo = findViewById<EditText>(R.id.exerciseDescriptionEdit).text.toString()
+            //now let's make this button start up a 'new' activity...
+            val intent = Intent(this, AddActivity::class.java)
+            //intent.putExtra(ARTICLE_EXTRA, article)
+            this.startActivity(intent)
 
-            //save the event to Database
-            lifecycleScope.launch(IO) {
-                (application as MyApplication).db.exerciseDao().insert(
-                    ExerciseEntity(exerciseName, exerciseInfo)
-                )
-            }
+
+            //originally just used the button to add the information
+//            val exerciseName = findViewById<EditText>(R.id.exerciseNameEdit).text.toString()
+//            val exerciseInfo = findViewById<EditText>(R.id.exerciseDescriptionEdit).text.toString()
+//
+//            //save the event to Database
+//            lifecycleScope.launch(IO) {
+//                (application as MyApplication).db.exerciseDao().insert(
+//                    ExerciseEntity(exerciseName, exerciseInfo)
+//                )
+//            }
         }
 
         //get the recyclerView here
